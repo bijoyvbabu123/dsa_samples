@@ -30,6 +30,21 @@ def listOfSubsets(p, up):
 
 	return subset_list
 
+def listOfSubsetsWithoutListCopy(p, up):
+	if not up:
+		pp = p.copy()
+		return [pp]
+	
+	subset_list = list()
+	curr_num = up[0]
+
+	p.append(curr_num)
+	subset_list.extend(listOfSubsetsWithoutListCopy(p, up[1:]))
+	if p:
+		p.pop(-1)
+	subset_list.extend(listOfSubsetsWithoutListCopy(p, up[1:]))
+	return subset_list
+
 
 
 
@@ -37,4 +52,5 @@ def listOfSubsets(p, up):
 nums = [2, 3, 4]
 l = list()
 # printSubsets(l, nums)
-print(listOfSubsets(l, nums))
+# print(listOfSubsets(l, nums))
+print(listOfSubsetsWithoutListCopy(l, nums))
